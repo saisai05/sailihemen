@@ -63,8 +63,13 @@
       text-decoration: underline;
     }
 
+    a {
+      transition: filter 0.2s ease;
+    }
+
     a:hover {
       color: var(--muted);
+      filter: blur(2px);
     }
 
     .links a {
