@@ -237,7 +237,8 @@
       const figure = document.querySelector('.figure');
       figure.addEventListener('touchstart', (e) => {
         e.preventDefault();
-        figure.classList.toggle('tapped');
+        const tapped = figure.classList.toggle('tapped');
+        figure.style.animationPlayState = tapped ? 'paused' : 'running';
       }, { passive: false });
     });
   </script>
