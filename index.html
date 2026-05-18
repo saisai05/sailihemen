@@ -181,6 +181,10 @@
       animation-play-state: paused;
     }
 
+    @media (hover: none) {
+      .figure { animation-duration: 7s; }
+    }
+
     @media (hover: hover) {
       .figure:hover { animation-play-state: paused; }
       .figure:hover .player-inner,
