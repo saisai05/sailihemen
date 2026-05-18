@@ -169,12 +169,19 @@
     }
 
     .figure:hover .player-inner,
-    .figure:hover .dribble-ball {
+    .figure:hover .dribble-ball,
+    .figure.tapped .player-inner,
+    .figure.tapped .dribble-ball {
       visibility: hidden;
     }
 
-    .figure:hover .figure-hover {
+    .figure:hover .figure-hover,
+    .figure.tapped .figure-hover {
       visibility: visible;
+    }
+
+    .figure.tapped {
+      animation-play-state: paused;
     }
 
   </style>
@@ -226,6 +233,12 @@
         recommendLink.textContent = recommendedRead.text;
         recommendLink.href = recommendedRead.url;
       }
+
+      const figure = document.querySelector('.figure');
+      figure.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        figure.classList.toggle('tapped');
+      }, { passive: false });
     });
   </script>
 </body>
