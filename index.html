@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sailihe Men</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --fg: #111;
+      --bg: #fff;
+      --muted: #666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px / 1.6 "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .content {
+      max-width: 460px;
+      width: 100%;
+      text-align: left;
+      margin: 0 auto;
+      transform: translate(20px, -20px);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--fg);
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .links {
+      margin-top: 0.75rem;
+    }
+
+    a {
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: var(--muted);
+    }
+
+    .links a {
+      margin-right: 0.85rem;
+      font-size: 0.95rem;
+    }
+
+    /* ── Moving player ── */
+    .figure {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      cursor: default;
+      animation: walk-across 11s linear infinite;
+    }
+
+    .figure:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes walk-across {
+      from { transform: translateX(-200px); }
+      to   { transform: translateX(calc(100vw + 20px)); }
+    }
+
+    /* Crop the large canvas down to just the figure */
+    .player-inner {
+      position: relative;
+      width: 95px;
+      height: 160px;
+      overflow: hidden;
+    }
+
+    /* scale=150/215=0.698 → display 1337px wide; content at x=410,y=200 */
+    .player-img {
+      position: absolute;
+      width: 1337px;
+      height: auto;
+      top: -198px;
+      left: -408px;
+    }
+
+    /* Bouncing ball overlaid on figure */
+    .dribble-ball {
+      position: absolute;
+      right: -47px;
+      bottom: 10px;
+      width: 60px;
+      height: 57px;
+      overflow: hidden;
+      animation: ball-bounce 0.5s ease-in-out infinite;
+    }
+
+    /* scale=55/86=0.640 → display 1225px wide; content at x=518,y=247 */
+    .ball-img {
+      position: absolute;
+      width: 1225px;
+      height: auto;
+      top: -245px;
+      left: -516px;
+    }
+
+    @keyframes ball-bounce {
+      0%, 100% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+      }
+      50% {
+        transform: translateY(-28px);
+        animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+      }
+    }
+
+    /* ── Hover pose ── */
+    .figure {
+      width: 130px;
+      height: 160px;
+    }
+
+    .figure-hover {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 130px;
+      height: 155px;
+      overflow: hidden;
+    }
+
+    /* scale=150/228=0.658 → display 1260px wide; content at x=527,y=194 */
+    .hover-img {
+      position: absolute;
+      width: 1260px;
+      height: auto;
+      top: -194px;
+      left: -525px;
+    }
+
+    .figure:hover .player-inner,
+    .figure:hover .dribble-ball {
+      visibility: hidden;
+    }
+
+    .figure:hover .figure-hover {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Sailihe Men</h1>
+    <p id="reading">currently reading dawn of everything by g&amp;w</p>
+    <p>recommended read <a id="recommend-link" href="https://paulgraham.com/genius.html" target="_blank">"The Bus Ticket Theory of Genius"</a></p>
+    <div class="links">
+      <a href="mailto:sailihe_men@brown.edu">email</a>
+      <a href="https://www.linkedin.com/in/sailihemen/" target="_blank">linkedin</a>
+    </div>
+  </div>
+
+  <!-- Player dribbling across screen -->
+  <div class="figure">
+    <div class="player-inner">
+      <img src="player.png - Edited.png" class="player-img" alt="">
+    </div>
+    <div class="dribble-ball">
+      <img src="basketball - Edited.png" class="ball-img" alt="">
+    </div>
+    <!-- Hover pose -->
+    <div class="figure-hover">
+      <img src="standing still hover - Edited.png" class="hover-img" alt="">
+    </div>
+  </div>
+
+
+
+  <script>
+    // Edit these two values in VS Code to update the page
+    const currentlyReading = "dawn of everything by g&w";
+    const recommendedRead = {
+      text: "\"The Bus Ticket Theory of Genius\"",
+      url: "https://paulgraham.com/genius.html"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const readingEl = document.getElementById("reading");
+      const recommendLink = document.getElementById("recommend-link");
+
+      if (readingEl) {
+        readingEl.textContent = `currently reading ${currentlyReading}`;
+      }
+      if (recommendLink) {
+        recommendLink.textContent = recommendedRead.text;
+        recommendLink.href = recommendedRead.url;
+      }
+    });
+  </script>
+</body>
+</html>
