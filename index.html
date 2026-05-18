@@ -235,10 +235,16 @@
       }
 
       const figure = document.querySelector('.figure');
+      const playerInner = figure.querySelector('.player-inner');
+      const dribbleBall = figure.querySelector('.dribble-ball');
+      const figureHover = figure.querySelector('.figure-hover');
       figure.addEventListener('touchstart', (e) => {
         e.preventDefault();
         const tapped = figure.classList.toggle('tapped');
         figure.style.animationPlayState = tapped ? 'paused' : 'running';
+        playerInner.style.visibility = tapped ? 'hidden' : 'visible';
+        dribbleBall.style.visibility = tapped ? 'hidden' : 'visible';
+        figureHover.style.visibility = tapped ? 'visible' : 'hidden';
       }, { passive: false });
     });
   </script>
