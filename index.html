@@ -168,20 +168,24 @@
       left: -525px;
     }
 
-    .figure:hover .player-inner,
-    .figure:hover .dribble-ball,
     .figure.tapped .player-inner,
     .figure.tapped .dribble-ball {
       visibility: hidden;
     }
 
-    .figure:hover .figure-hover,
     .figure.tapped .figure-hover {
       visibility: visible;
     }
 
     .figure.tapped {
       animation-play-state: paused;
+    }
+
+    @media (hover: hover) {
+      .figure:hover { animation-play-state: paused; }
+      .figure:hover .player-inner,
+      .figure:hover .dribble-ball { visibility: hidden; }
+      .figure:hover .figure-hover { visibility: visible; }
     }
 
   </style>
